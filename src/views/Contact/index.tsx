@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useState , useCallback, FormEvent } from "react";
 
 import { Link } from 'react-router-dom';
 
 import { Container } from "./style";
+
+import { api } from "../../services/api";
 
 const Contact: React.FC = () => {
 
@@ -12,6 +14,18 @@ const Contact: React.FC = () => {
 	}
 
 	const [data, setData] = useState<IData>({} as IData);
+
+	const [submit, setSubmit] = useState(false);
+
+	const handleSubmit = useCallback( (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		api.post("", data).then(response => {
+			if(response.status === 200) {
+				setSubmit(true);
+			}
+		});
+	}, [data])
 
 	return (
 		<Container>
@@ -31,7 +45,15 @@ const Contact: React.FC = () => {
 				email: {data?.email}
 
 				<div className="card">
-					<form onSubmit={() => {} }>
+
+					{ submit ? (
+						<div>
+							<h1>Thanks for sharing your data</h1>
+
+						</div>
+					) : (
+
+					<form onSubmit={handleSubmit}>
 
 						<input
 							type="text"
@@ -46,10 +68,13 @@ const Contact: React.FC = () => {
 						<input type="submit" value="Submit" />
 
 					</form>
+					)}
+
 
 				</div>
 
 			</div>
+
 		</Container>
 	);
 }
