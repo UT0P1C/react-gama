@@ -6,6 +6,8 @@ import { Container } from './style';
 
 import { api } from "../../services/api";
 
+import { toast } from "react-toastify";
+
 const SignUp: React.FC = () => {
 
 	interface IData {
@@ -22,7 +24,15 @@ const SignUp: React.FC = () => {
 		e.preventDefault();
 		api.post("users", data).then(response => {
 			console.log(response.data);
-			history.push("/signin");
+			toast.success("Success !", {
+				theme: 'colored',
+				hideProgressBar: false,
+				onClose: () => history.push("/signin")
+			});
+		}).catch(e => {
+			toast.error("Failed :(", {
+				theme: 'colored'
+			});
 		})
 
 	}, [data, history])
