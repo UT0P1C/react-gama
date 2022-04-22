@@ -28,7 +28,7 @@ export const Container = styled.div`
 		a:hover{
 			color: #fff;
 		}
-		
+
 		h2{
 			font-size: 35px;
 			font-weight: bold;

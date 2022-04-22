@@ -1,8 +1,10 @@
 import React, {useState, useCallback, FormEvent} from 'react';
 
-import { useHistory} from "react-router-dom";
+import { useHistory, Link} from "react-router-dom";
 
 import { Container } from './style';
+
+import Loader from "../../components/Loader";
 
 import { api } from "../../services/api";
 
@@ -17,13 +19,16 @@ const SignUp: React.FC = () => {
 	}
 
 	const [data, setData] = useState<IData>({} as IData);
+	
+	const [load, setLoad] = useState(false);
 
 	const history = useHistory();
 
 	const handleSubmit = useCallback((e:FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setLoad(true);
 		api.post("users", data).then(response => {
-			console.log(response.data);
+			setLoad(false);
 			toast.success("Success !", {
 				theme: 'colored',
 				hideProgressBar: false,
@@ -33,9 +38,14 @@ const SignUp: React.FC = () => {
 			toast.error("Failed :(", {
 				theme: 'colored'
 			});
-		})
+		}).finally(() => setLoad(false));
 
 	}, [data, history])
+
+
+	if (load){
+		return <Loader/>
+	}
 	return (
 		<Container>
 			
@@ -60,10 +70,13 @@ const SignUp: React.FC = () => {
 					<input 
 						type="submit" 
 						id="register__button" 
-						value="Register" 
+						value="Sign Up" 
 					/>
 
 				</form>
+
+				
+				<Link to="/signin"> Already registered? Sign In</Link>
 			</div>
 		</Container>
 	);
