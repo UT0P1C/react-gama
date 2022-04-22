@@ -20,14 +20,14 @@ const SignUp: React.FC = () => {
 
 	const [data, setData] = useState<IData>({} as IData);
 
-	const [load, setLoad] = useState(true);
+	const [load, setLoad] = useState(false);
 
 	const history = useHistory();
 
 	const handleSubmit = useCallback((e:FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setLoad(true);
-		api.post("users", data).then(response => {
+		api.post("session", data).then(response => {
 			setLoad(false);
 			toast.success("Success !", {
 				theme: 'colored',

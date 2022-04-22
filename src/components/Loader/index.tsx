@@ -16,11 +16,14 @@ const Loader: React.FC = () => {
 
 	return (
 		<Container>
-			<Lottie 
-			options={defaultOptions}
-			height={400}
-			width={400}
-			/>
+			<div>
+				<h1>Loading...</h1>
+				<Lottie 
+				options={defaultOptions}
+				height={400}
+				width={400}
+				/>
+			</div>
 
 		</Container>
 	);
