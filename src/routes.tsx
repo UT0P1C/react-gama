@@ -6,7 +6,7 @@ import Home from './views/Home';
 import Contact from "./views/Contact";
 import SignUp from './views/SignUp';
 import SignIn from './views/SignIn';
-
+import Dash from './views/Dash';
 
 const Router: React.FC = () => {
 	return (
@@ -14,11 +14,12 @@ const Router: React.FC = () => {
 
 			<Switch>
 
-			<Route path="/" exact component={Home}/>
+				<Route path="/" exact component={Home}/>
 
-			<Route path="/contact" exact component={Contact}/>
-			<Route path={"/signin"} exact component={SignIn}/>
-			<Route path={"/signup"} exact component={SignUp}/>
+				<Route path="/contact" exact component={Contact}/>
+				<Route path="/signin" exact component={SignIn}/>
+				<Route path="/signup" exact component={SignUp}/>
+				<Route path="/dashboard" exact component={Dash} />
 
 			</Switch>
 		

@@ -28,11 +28,15 @@ const SignUp: React.FC = () => {
 		e.preventDefault();
 		setLoad(true);
 		api.post("session", data).then(response => {
+			const sessionToken = JSON.stringify(response.data.token);
+
+			localStorage.setItem('@gamaAcademyServiceToken', sessionToken);
+
 			setLoad(false);
 			toast.success("Success !", {
 				theme: 'colored',
 				hideProgressBar: false,
-				onClose: () => history.push("/signin")
+				onClose: () => history.push("/dashboard")
 			});
 		}).catch(e => {
 			toast.error("Failed :(", {
